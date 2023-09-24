@@ -1,6 +1,7 @@
 package com.czy;
 
 
+import com.czy.Utils.factory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,7 +15,8 @@ public class jedisTest {
 
     @BeforeEach
     void setup(){
-        jedis = new Jedis("192.168.137.3",6378);
+//        jedis = new Jedis("192.168.137.3",6378);
+        jedis = factory.getJedisPo();
         jedis.auth("123456");
         //选择库
         jedis.select(0);
@@ -42,6 +44,9 @@ public class jedisTest {
 
         jedis.hset("user:czyyy","name","czyy");
         jedis.hset("user:czyyy","age","21");
+
+        jedis.hset("user:ysy","name","czyy");
+        jedis.hset("user:ysy","age","21");
 
         Map<String, String> stringStringMap = jedis.hgetAll("user:czyyy");
         System.out.println(stringStringMap);
