@@ -9,7 +9,9 @@ import redis.clients.jedis.Jedis;
 
 import java.util.Map;
 
-
+/**
+ * jedis客户端测试
+ */
 public class jedisTest {
     private Jedis jedis;
 
