@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
+import java.util.Map;
+
 /**
  * StringRedisTemplate 客户端测试   需要手动序列化，但是都是以字符串的形式存储
  */
@@ -34,5 +36,12 @@ public class StringRedisTest {
         stringRedisTemplate.opsForValue().set("user:101", JSON.toJSONString(user1));
         User user = JSON.parseObject(stringRedisTemplate.opsForValue().get("user:101"), User.class);
         System.out.println("user-------->"+user);
+    }
+    @Test
+    void testHash(){
+        stringRedisTemplate.opsForHash().put("user:400","name","陈忠原");
+        stringRedisTemplate.opsForHash().put("user:400","age","22");
+        Map<Object, Object> entries = stringRedisTemplate.opsForHash().entries("user:400");
+        System.out.println(entries);
     }
 }
